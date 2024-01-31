@@ -14,3 +14,10 @@ class NoticeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notice
         fields = ('title', 'description')
+
+
+class NoticeDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Notice
+        fields = ('id', 'title', 'description', 'created', 'views')
