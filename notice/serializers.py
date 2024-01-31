@@ -13,7 +13,7 @@ class NoticeSimpleSerializer(serializers.ModelSerializer):
 class NoticeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notice
-        fields = ('title', 'description')
+        fields = ('title', 'description', 'password')
 
 
 class NoticeDetailSerializer(serializers.ModelSerializer):

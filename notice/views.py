@@ -36,13 +36,19 @@ class NoticeAPIView(APIView):
 
     def patch(self, request, pk):
         notice = get_object_or_404(Notice, id=pk)
-        serializer = NoticeDetailSerializer(notice, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        password = request.data.get('password')
+        if password == notice.password:
+            serializer = NoticeDetailSerializer(notice, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk):
         notice = get_object_or_404(Notice, id=pk)
-        notice.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        password = request.data.get('password')
+        if password == notice.password:
+            notice.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_403_FORBIDDEN)
