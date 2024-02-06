@@ -80,5 +80,6 @@ fabric.properties
 venv/
 db.sqlite3
 .idea/
-noticeboard/__pycache__
-notice/__pycache__
+.DS_Store
+noticeboard/__pycache__/
+notice/__pycache__/
