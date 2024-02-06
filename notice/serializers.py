@@ -7,7 +7,7 @@ class NoticeSimpleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notice
-        fields = ('id', 'title', 'created', 'views')
+        fields = ('id', 'title', 'description', 'created', 'views')
 
 
 class NoticeCreateSerializer(serializers.ModelSerializer):
